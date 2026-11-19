@@ -327,7 +327,8 @@ class AuthNotifier extends StateNotifier<AuthState> {
             email: cleanEmail,
             password: password,
             data: {'full_name': cleanName},
-            emailRedirectTo: kIsWeb ? null : SupabaseConfig.oauthRedirectUrl,
+            emailRedirectTo:
+                kIsWeb ? Uri.base.origin : SupabaseConfig.oauthRedirectUrl,
           )
           .timeout(const Duration(seconds: 10));
 
@@ -427,7 +428,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
       // Fallback OAuth flow Supabase (browser / deep link callback)
       final launched = await client.auth.signInWithOAuth(
         OAuthProvider.google,
-        redirectTo: kIsWeb ? null : SupabaseConfig.oauthRedirectUrl,
+        redirectTo: kIsWeb ? Uri.base.origin : SupabaseConfig.oauthRedirectUrl,
         authScreenLaunchMode: kIsWeb
             ? LaunchMode.platformDefault
             : LaunchMode.externalApplication,
