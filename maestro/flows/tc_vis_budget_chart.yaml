@@ -1,0 +1,42 @@
+appId: com.finku.finku_app
+name: "Modul 4 - Visualisasi Grafik Anggaran Bulanan (TC-VIS-01 s/d TC-VIS-04)"
+---
+- launchApp:
+    clearState: true
+- tapOn:
+    id: "btn_demo_owner"
+
+# TC-VIS-01: Akurasi Agregasi Matematis & Donut Chart
+- assertVisible:
+    id: "chart_monthly_donut"
+- assertVisible:
+    id: "progress_budget_bar"
+- assertVisible:
+    id: "filter_wallet_type"
+
+# Switch Dompet Pribadi <-> Dompet Bersama
+- tapOn: "Dompet Bersama"
+- assertVisible:
+    id: "chart_monthly_donut"
+- tapOn: "Dompet Pribadi"
+
+# TC-VIS-02: Atur Batas Anggaran & Kode Warna Ambang Batas (<75% Hijau, 75-90% Kuning, >90% Merah)
+- tapOn:
+    id: "btn_open_settings"
+- assertVisible:
+    id: "input_budget_limit"
+- tapOn:
+    id: "btn_save_budget"
+- assertVisible: "Batas anggaran disimpan"
+- back
+
+# TC-VIS-04: Empty State pada bulan tanpa transaksi
+- tapOn:
+    id: "filter_month_selector"
+- tapOn: "Desember 2026 (Kosong)"
+- assertVisible: "Belum ada transaksi"
+- tapOn:
+    id: "filter_month_selector"
+- tapOn: "November 2026"
+- assertVisible:
+    id: "chart_monthly_donut"

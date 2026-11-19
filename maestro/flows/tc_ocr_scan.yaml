@@ -1,0 +1,49 @@
+appId: com.finku.finku_app
+name: "Modul 1 - OCR Scan Struk Belanja (TC-OCR-01 s/d TC-OCR-04)"
+---
+- launchApp:
+    clearState: true
+- assertVisible:
+    id: "btn_demo_owner"
+- tapOn:
+    id: "btn_demo_owner"
+- assertVisible:
+    id: "chart_monthly_donut"
+
+# Navigasi ke tab Scan Struk
+- tapOn: "Scan Struk"
+- assertVisible:
+    id: "btn_scan_receipt"
+
+# TC-OCR-01: Struk Cetak Jelas (Indomaret Sudirman)
+- tapOn: "TC-OCR-01"
+- tapOn:
+    id: "btn_scan_receipt"
+- assertVisible:
+    id: "input_ocr_merchant"
+- assertVisible: "Indomaret Sudirman"
+- assertVisible:
+    id: "input_ocr_total"
+
+# TC-OCR-02: Struk Kusut / Pudar (Contrast Stretching)
+- tapOn: "TC-OCR-02"
+- tapOn:
+    id: "btn_scan_receipt"
+- assertVisible: "Alfamart Kemang"
+
+# TC-OCR-03: Struk Miring 30 Derajat (Auto Deskew)
+- tapOn: "TC-OCR-03"
+- tapOn:
+    id: "btn_scan_receipt"
+- assertVisible: "Superindo Dago"
+
+# TC-OCR-04: Normalisasi Multi-Format Angka (15,000.00 & Rp 25.604,-) & Simpan Review
+- tapOn: "TC-OCR-04"
+- tapOn:
+    id: "btn_scan_receipt"
+- assertVisible: "Starbucks Reserve"
+- assertVisible:
+    id: "btn_save_ocr_tx"
+- tapOn:
+    id: "btn_save_ocr_tx"
+- assertVisible: "Transaksi OCR tersimpan"

@@ -1,0 +1,54 @@
+appId: com.finku.finku_app
+name: "Modul 2 - FinGPT AI Expense Logger (TC-AI-01 s/d TC-AI-04)"
+---
+- launchApp:
+    clearState: true
+- tapOn:
+    id: "btn_demo_owner"
+- assertVisible:
+    id: "chart_monthly_donut"
+
+# Navigasi ke tab FinGPT
+- tapOn: "FinGPT"
+- assertVisible:
+    id: "input_fingpt_chat"
+
+# TC-AI-01: Pencatatan Tunggal Natural Language
+- tapOn:
+    id: "input_fingpt_chat"
+- inputText: "Catat makan siang 35k pakai GoPay"
+- tapOn:
+    id: "btn_send_fingpt"
+- assertVisible:
+    id: "card_ai_confirmation"
+- assertVisible: "Makanan & Minuman"
+
+# TC-AI-02: Pemecahan Multi-Transaksi & Bahasa Slang (50rb, 2rb, 18k)
+- tapOn:
+    id: "input_fingpt_chat"
+- inputText: "Beli bensin 50rb, parkir 2rb, sama jajan kopi 18k pakai OVO"
+- tapOn:
+    id: "btn_send_fingpt"
+- assertVisible:
+    id: "card_ai_confirmation"
+- assertVisible: "Rp 70.000"
+- tapOn:
+    id: "btn_confirm_ai_tx"
+- assertVisible: "berhasil dicatat"
+
+# TC-AI-03: Penanganan Kalimat Ambigu (Dilarang buat Rp0)
+- tapOn:
+    id: "input_fingpt_chat"
+- inputText: "Tadi habis bayar tagihan bulanan"
+- tapOn:
+    id: "btn_send_fingpt"
+- assertNotVisible: "Rp 0"
+- assertVisible: "nominal"
+
+# TC-AI-04: Pemetaan Kategori Taksonomi Resmi
+- tapOn:
+    id: "input_fingpt_chat"
+- inputText: "Listrik PLN 150rb"
+- tapOn:
+    id: "btn_send_fingpt"
+- assertVisible: "Tagihan & Utilitas"

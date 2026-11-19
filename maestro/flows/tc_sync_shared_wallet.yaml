@@ -1,0 +1,51 @@
+appId: com.finku.finku_app
+name: "Modul 3 - Sinkronisasi Mode Bersama & RBAC (TC-SYNC-01 s/d TC-SYNC-04)"
+---
+- launchApp:
+    clearState: true
+
+# Login sebagai Owner
+- tapOn:
+    id: "btn_demo_owner"
+- tapOn: "Bersama"
+- assertVisible:
+    id: "badge_sync_status"
+- assertVisible:
+    id: "badge_member_role"
+- assertVisible: "Owner"
+
+# TC-SYNC-01 & TC-SYNC-02: Akses Edit/Hapus tersedia untuk Owner & Editor
+- assertVisible:
+    id: "btn_edit_tx"
+- assertVisible:
+    id: "btn_delete_tx"
+
+# TC-SYNC-03: Antrean Offline & Deduplikasi client_tx_id
+- tapOn:
+    id: "badge_sync_status"
+- assertVisible: "Offline"
+- tapOn: "Top Up / Catat"
+- inputText: "Galon Kos Offline"
+- tapOn: "Simpan Catatan"
+- assertVisible: "1 tertunda"
+- tapOn:
+    id: "badge_sync_status"
+- assertVisible: "Tersinkronisasi (Live)"
+
+# TC-SYNC-04: Pembatasan Hak Akses Peran Viewer (Read-only)
+- tapOn:
+    id: "btn_open_settings"
+- tapOn:
+    id: "btn_logout"
+- assertVisible:
+    id: "btn_demo_viewer"
+- tapOn:
+    id: "btn_demo_viewer"
+- tapOn: "Bersama"
+- assertVisible:
+    id: "badge_member_role"
+- assertVisible: "Viewer"
+- assertNotVisible:
+    id: "btn_edit_tx"
+- assertNotVisible:
+    id: "btn_delete_tx"

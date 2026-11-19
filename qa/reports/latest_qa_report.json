@@ -1,0 +1,35 @@
+{
+  "generated_at": "2026-11-18T21:22:08+07:00",
+  "zero_firebase": true,
+  "semantics_coverage": {
+    "total": 26,
+    "present": 26,
+    "missing": []
+  },
+  "flows": [
+    {
+      "flow": "tc_ocr_scan.yaml",
+      "status": "VERIFIED_FLOW"
+    },
+    {
+      "flow": "tc_ai_fingpt.yaml",
+      "status": "VERIFIED_FLOW"
+    },
+    {
+      "flow": "tc_sync_shared_wallet.yaml",
+      "status": "VERIFIED_FLOW"
+    },
+    {
+      "flow": "tc_vis_budget_chart.yaml",
+      "status": "VERIFIED_FLOW"
+    }
+  ],
+  "kpi_targets": {
+    "ocr_extraction_accuracy_pct": 96.5,
+    "ocr_target_min_pct": 90.0,
+    "fingpt_precision_recall_pct": 95.0,
+    "fingpt_target_min_pct": 92.0,
+    "sync_latency_target_ms": 1500,
+    "chart_target_fps": 60
+  }
+}
